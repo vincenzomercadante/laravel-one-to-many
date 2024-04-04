@@ -37,6 +37,9 @@
                                 <a href={{ route('admin.projects.show', $project) }}
                                     class="card-link">{{ $project->slug }}</a>
                             </li>
+                            <li class="list-group-item">
+                                {!! $project->type->getTypeLabel() !!}
+                            </li>
                         </ul>
                         {{-- link for github --}}
                         <div class="card-body">

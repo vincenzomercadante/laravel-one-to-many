@@ -21,7 +21,7 @@ class ProjectSeeder extends Seeder
 
         $project->title = 'Vite Boolzap';
         $project->slug = Str::slug($project->title);
-        $project->types_id = 1;
+        $project->type_id = 1;
         $project->github_reference = 'https://github.com/vincenzomercadante/vite-boolflix';
         $project->description = 'A chat application with Vite+Vue';
 

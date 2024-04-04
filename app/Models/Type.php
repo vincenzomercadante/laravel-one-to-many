@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     use HasFactory;
+
+    public function projects(){
+        return $this->hasMany(Project::class);
+    }
+
+    public function getTypeLabel(){
+        return "<div class='badge' style='background-color: {$this->color}'> {$this->label} </div>";
+    }
 }

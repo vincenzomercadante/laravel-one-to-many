@@ -14,12 +14,24 @@
 
             <div class="col-2">
                 <label for="color" class="form-label">Badge Color:</label>
-                <input type="color" name="color" id="color" class="form-control" value="{{ $type->color }}" required>
+                <input type="color" name="color" id="color" class="form-control @error('color') is-invalid @enderror"
+                    value="{{ old('color', $type->color) }}" required>
+                @error('color')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="col-10">
                 <label for="label" class="form-label">Type Label:</label>
-                <input type="text" name="label" id="label" class="form-control" value="{{ $type->label }}"
+                <input type="text" name="label" id="label"
+                    class="form-control @error('label') is-invalid @enderror" value="{{ old('label', $type->label) }}"
                     placeholder="Type Label" required>
+                @error('label')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="col-6">
                 <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Save</button>

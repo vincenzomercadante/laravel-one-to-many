@@ -6,7 +6,7 @@
     <div class="container" id="types">
 
         @if (session('message-text'))
-            <div class="alert {{ session('message-status') }} alert-dismissible fade show" role="alert">
+            <div class="alert {{ session('message-status') }} alert-dismissible fade show my-4" role="alert">
                 {{ session('message-text') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

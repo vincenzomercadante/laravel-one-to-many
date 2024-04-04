@@ -41,18 +41,18 @@ class TypeController extends Controller
         $type->fill($data);
         $type->save();
 
-        return redirect()->route('admin.types.show', $type)->with('message-status', 'alert-success')->with('message-text', 'Type created successfully');
+        return redirect()->route('admin.types.show', compact('type'))->with('message-status', 'alert-success')->with('message-text', 'Type created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Type  $type
-     */
-    public function show(Type $type)
-    {
-        return view('admin.projects.show', $type);
-    }
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @param  \App\Models\Type  $type
+    //  */
+    // public function show(Type $type)
+    // {
+    //     return view('admin.projects.show', compact('type'));
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -61,7 +61,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        return view('admin.types.edit', $type);
+        return view('admin.types.edit', compact('type'));
     }
 
     /**
@@ -75,7 +75,7 @@ class TypeController extends Controller
         $data = $request->all();
         $type->update($data);
 
-        return redirect()->route('admin.types.show', $type)->with('message-status', 'alert-success')->with('message-text', 'Type modified successfully');
+        return redirect()->route('admin.types.index')->with('message-status', 'alert-success')->with('message-text', 'Type modified successfully');
     }
 
     /**

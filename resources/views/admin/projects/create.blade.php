@@ -11,11 +11,24 @@
         <form action="{{ route('admin.projects.store') }}" method="POST" class="row gy-4">
             @csrf
 
-            <div class="col-12">
+            <div class="col-6">
                 <label for="title" class="form-label mb-2">Project's Title</label>
                 <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror"
                     placeholder="Project's Title" value="{{ old('title') }}">
                 @error('title')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-6">
+                <label for="type_id" class="form-label mb-2">Project's Type</label>
+                <select name="type_id" id="type_id" class="form-select">
+                    <option selected class="d-none">Select a project type</option>
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}" @if (old('type_id', $type->id) == $type->id) selected @endif>
+                            {{ $type->label }}</option>
+                    @endforeach
+                </select>
+                @error('type')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>

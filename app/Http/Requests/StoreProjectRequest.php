@@ -25,6 +25,7 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:projects,title|string|max:100',
+            'type_id' => 'required|exists:types,id',
             'github_reference' => 'required|unique:projects,github_reference|url|max:255',
             'description' => 'required|string|max:65535'
         ];
@@ -36,6 +37,9 @@ class StoreProjectRequest extends FormRequest
             'title.unique' => 'Title selected is already used',
             'title.string' => 'Title must to be a string',
             'title.max' => 'Too long title',
+
+            'type_id.required' => 'Type is required',
+            'type_id.exists' => 'Type not available',
             
             'github_reference.required' => 'Github Link is required',
             'github_reference.unique' => 'Github Link selected is already used',

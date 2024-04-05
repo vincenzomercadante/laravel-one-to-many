@@ -25,7 +25,7 @@ class StoreTypeRequest extends FormRequest
     {
         return [
             'label' => 'required|unique:types,label|string|max:30',
-            'color' => 'required|unique:types,color|regex:/^#([a-f0-9]{6}|[a-f0-9]{3})$/i'
+            'color' => ['required', 'regex:/^#([a-f0-9]{6}|[a-f0-9]{3})$/i', 'unique:types,color']
         ];
     }
 

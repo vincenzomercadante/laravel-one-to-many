@@ -8,6 +8,8 @@
 
         <form action="{{ route('admin.types.store') }}" method="POST" class="row gy-3">
 
+            @csrf
+
             <div class="col-2">
                 <label for="color" class="form-label">Badge Color:</label>
                 <input type="color" name="color" id="color" class="form-control @error('color') is-invalid @enderror"

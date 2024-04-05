@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="container" id="types">
-
         @if (session('message-text'))
             <div class="alert {{ session('message-status') }} alert-dismissible fade show my-4" role="alert">
                 {{ session('message-text') }}
@@ -64,27 +63,45 @@
         <div class="modal fade" id="destroy-modal-{{ $type->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <form class="modal-content" action="{{ route('admin.types.destroy', $type) }}" method="POST">
+                    @csrf
+
+                    @method('DELETE')
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete {{ $type->label }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <span class="fw-bold text-uppercase text-danger">attention:</span><br>
                         If you delete {{ $type->label }} every project which has this type will be deleted.<br>
-                        You confirm?
+                        You confirm this choice?
+                        <input type="hidden" name="delete-choice" value="delete-projects">
+                        @if ($type->projects->all())
+                            You want to change the project type before that?
+
+                            <br>
+
+                            <label for="delete-choice" class="form-label fw-semibold">Delete Method</label>
+                            <select name="delete-choice" id="delete-choice" class="form-select">
+                                <option value="delete-projects">Delete Projects</option>
+
+                                @foreach ($types as $related_type)
+                                    @if ($related_type->id != $type->id)
+                                        <option value="{{ $related_type->id }}">{{ $related_type->label }}</option>
+                                    @endif
+                                @endforeach
+                        @endif
+                        </select>
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <form action="{{ route('admin.types.destroy', $type) }}" method="POST">
-                            @csrf
-
-                            @method('DELETE')
+                        <div>
 
                             <input type="submit" value="Delete Type" class="btn btn-danger">
-                        </form>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     @endforeach

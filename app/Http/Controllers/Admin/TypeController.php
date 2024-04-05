@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTypeRequest;
 use App\Http\Requests\UpdateTypeRequest;
+use App\Models\Project;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -91,10 +92,25 @@ class TypeController extends Controller
      *
      * @param  \App\Models\Type  $type
      */
-    public function destroy(Type $type)
+    public function destroy(Request $request, Type $type)
     {
+        $data = $request->input('delete-choice');
+
+        $projects = Project::all();
+        if($data != 'delete-projects'){
+            
+            foreach($projects as $project){
+                $project->type_id = $data;
+                $project->save();
+            }    
+        } else {
+            foreach($projects as $project){
+                $project->delete();
+            }
+        }
+
         $type->delete();
 
-        return redirect()->route('admin.types.index')->with('message-status', 'alert-warning')->with('message-text', 'Type deleted successfully');
+        return redirect()->route('admin.types.index')->with('message-status', 'alert-danger')->with('message-text', 'Type deleted successfully');
     }
 }

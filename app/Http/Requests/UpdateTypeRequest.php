@@ -25,7 +25,7 @@ class UpdateTypeRequest extends FormRequest
     {
         return [
             'label' => 'required|string|max:30',
-            'color' => 'required|hex_color'
+            'color' => ['required', 'regex:/^#([a-f0-9]{6}|[a-f0-9]{3})$/i']
         ];
     }
 
@@ -36,7 +36,7 @@ class UpdateTypeRequest extends FormRequest
             'label.max' => 'Too long label',
             
             'color.required' => 'Badge Color is required',
-            'color.hex_color' => 'Badge Color must be a hexadecimal color',
+            'color.regex:/^#([a-f0-9]{6}|[a-f0-9]{3})$/i' => 'Badge Color must be a hexadecimal color',
         ];
     }
 }

@@ -25,7 +25,7 @@ class StoreTypeRequest extends FormRequest
     {
         return [
             'label' => 'required|unique:types,label|string|max:30',
-            'color' => 'required|unique:types,color|hex_color'
+            'color' => 'required|unique:types,color|regex:/^#([a-f0-9]{6}|[a-f0-9]{3})$/i'
         ];
     }
 
@@ -37,7 +37,7 @@ class StoreTypeRequest extends FormRequest
             'label.unique' => 'Label is already used',
 
             'color.required' => 'Badge Color is required',
-            'color.hex_color' => 'Badge Color must be a hexadecimal color',
+            'color.regex:/^#([a-f0-9]{6}|[a-f0-9]{3})$/i' => 'Badge Color must be a hexadecimal color',
             'color.unique' => 'Badge Color is already used',
 
         ];

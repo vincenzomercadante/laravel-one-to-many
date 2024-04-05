@@ -34,7 +34,10 @@
                         <td>{{ $type->color }}</td>
                         <td>{!! $type->getTypeLabel() !!}</td>
                         <td>
-                            <a class="btn btn-warning text-uppercase" href="{{ route('admin.types.edit', $type) }}">
+                            <a class="btn btn-primary" href="{{ route('admin.types.show', $type) }}">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                            <a class="btn btn-warning" href="{{ route('admin.types.edit', $type) }}">
                                 <i class="fa-solid fa-pencil"></i>
                             </a>
                             <button type="button" class="btn btn-danger text-uppercase" data-bs-toggle="modal"

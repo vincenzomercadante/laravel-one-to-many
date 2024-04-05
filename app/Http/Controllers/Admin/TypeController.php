@@ -49,15 +49,16 @@ class TypeController extends Controller
         return redirect()->route('admin.types.show', compact('type'))->with('message-status', 'alert-success')->with('message-text', 'Type created successfully');
     }
 
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  \App\Models\Type  $type
-    //  */
-    // public function show(Type $type)
-    // {
-    //     return view('admin.projects.show', compact('type'));
-    // }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Type  $type
+     */
+    public function show(Type $type)
+    {
+        $projects = $type->projects->all();
+        return view('admin.types.show', compact('type', 'projects'));
+    }
 
     /**
      * Show the form for editing the specified resource.
